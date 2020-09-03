@@ -1,0 +1,14 @@
+.chat-bottom {
+	width: 100%;
+	min-height: 55px;
+	background-color: royalblue;
+	border: 2px solid black;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.chat-message-input-box {
+	width: 80%;
+	height: 90%;
+}
