@@ -9,6 +9,21 @@
 }
 
 .chat-message-input-box {
-	width: 80%;
+	width: 85%;
 	height: 90%;
+	resize: none;
+	padding: 5px;
+	font-size: 20px
+}
+
+.icon {
+	color: white;
+	height: 35px;
+	cursor: pointer;
+}
+
+.emoji-picker {
+	position: absolute;
+	z-index: 1;
+	bottom: 70px;
 }

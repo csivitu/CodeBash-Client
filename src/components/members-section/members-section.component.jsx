@@ -5,10 +5,10 @@ import MembersList from '../members-list/members-list.component';
 
 import './members-section.styles.css';
 
-const MembersSection = () => (
+const MembersSection = ({ members }) => (
     <div className="members-section">
         <MembersHeader />
-        <MembersList />
+        <MembersList members={members} />
     </div>
 );
 
