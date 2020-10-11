@@ -8,6 +8,16 @@
 	margin-bottom: 10px;
 }
 
+.code-box {
+	margin-bottom: 10px;
+	height: fit-content;
+	width: max-content;
+}
+
 .right {
 	margin-left: auto;
+}
+
+#coding-space-message {
+	pointer-events: none;
 }

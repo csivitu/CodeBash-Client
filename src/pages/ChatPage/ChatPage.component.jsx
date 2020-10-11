@@ -18,7 +18,11 @@ const ChatPage = ({ location, history }) => {
     const [roomUsers, setRoomUsers] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [emojiPopup, setEmojiPopup] = useState(1);
+    const [emojiPopup, setEmojiPopup] = useState(0);
+    const [cePopup, setCePopup] = useState(0);
+    const [code, setCode] = useState('');
+    const [theme, setTheme] = useState('Monokai');
+    const [language, setLanguage] = useState('Javascript');
 
     const ENDPOINT = 'localhost:5000';
 
@@ -76,14 +80,42 @@ const ChatPage = ({ location, history }) => {
         socket.emit('sendMessage', {
             message: input,
             user: name,
+            type: 'message'
+        });
+    };
+
+    const sendCode = (e) => {
+        e.preventDefault();
+        console.log('sendcode triggered');
+        socket.emit('sendMessage', {
+            message: code,
+            user: name,
+            type: 'code'
         });
     };
 
     const changeInput = (e) => setInput(e.target.value);
     const addEmojiToText = (emoji) => setInput(input + emoji);
     const toggleEmojiPopup = () => {
-        if (emojiPopup === 0) setEmojiPopup(1);
-        else setEmojiPopup(0);
+        if (emojiPopup === 0) {
+            setEmojiPopup(1);
+            setCePopup(0);
+        }
+        else {
+            setEmojiPopup(0);
+        }
+    };
+    const toggleCePopup = () => {
+        if (cePopup === 0) {
+            setCePopup(1);
+            setEmojiPopup(0);
+        }
+        else {
+            setCePopup(0);
+        }
+    };
+    const onChangeCode = (codeValue) => {
+        setCode(codeValue);
     };
     // return (
     //     <div>
@@ -159,10 +191,19 @@ const ChatPage = ({ location, history }) => {
                 name={name}
                 onInputChange={changeInput}
                 sendMessage={sendMessage}
+                sendCode={sendCode}
                 input={input}
                 addEmojiToText={addEmojiToText}
                 toggleEmojiPopup={toggleEmojiPopup}
                 emojiPopup={emojiPopup}
+                toggleCePopup={toggleCePopup}
+                cePopup={cePopup}
+                code={code}
+                onChangeCode={onChangeCode}
+                theme={theme}
+                setTheme={setTheme}
+                language={language}
+                setLanguage = {setLanguage}
             />
         </div>
     );
