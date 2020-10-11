@@ -80,7 +80,7 @@ const ChatPage = ({ location, history }) => {
         socket.emit('sendMessage', {
             message: input,
             user: name,
-            type: 'message'
+            type: 'message',
         });
     };
 
@@ -90,7 +90,7 @@ const ChatPage = ({ location, history }) => {
         socket.emit('sendMessage', {
             message: code,
             user: name,
-            type: 'code'
+            type: 'code',
         });
     };
 
@@ -100,8 +100,7 @@ const ChatPage = ({ location, history }) => {
         if (emojiPopup === 0) {
             setEmojiPopup(1);
             setCePopup(0);
-        }
-        else {
+        } else {
             setEmojiPopup(0);
         }
     };
@@ -109,8 +108,7 @@ const ChatPage = ({ location, history }) => {
         if (cePopup === 0) {
             setCePopup(1);
             setEmojiPopup(0);
-        }
-        else {
+        } else {
             setCePopup(0);
         }
     };
@@ -203,7 +201,7 @@ const ChatPage = ({ location, history }) => {
                 theme={theme}
                 setTheme={setTheme}
                 language={language}
-                setLanguage = {setLanguage}
+                setLanguage={setLanguage}
             />
         </div>
     );

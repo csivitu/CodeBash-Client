@@ -23,7 +23,9 @@ import 'ace-builds/src-noconflict/theme-terminal';
 
 import './message-box.styles.css';
 
-const MessageBox = ({ message, isMine, theme, language }) => {
+const MessageBox = ({
+    message, isMine, theme, language,
+}) => {
     const renderMessage = (message) => {
         if (message.message) {
             if (message.type === 'message') {
@@ -34,38 +36,37 @@ const MessageBox = ({ message, isMine, theme, language }) => {
                         {`${message.user}- ${message.message}`}
                     </div>
                 );
-            } else {
-                let mode = '';
-                if (language === 'C' || language === 'C++') {
-                    mode = 'c_cpp';
-                } else {
-                    mode = language;
-                }
-                return (
-                    <div
-                        className={isMine ? 'code-box right' : 'code-box'}
-                    >
-                        <AceEditor
-                            value={message.message}
-                            mode={mode.toLowerCase()}
-                            theme={theme.toLowerCase()}
-                            name="coding-space-message"
-                            highlightActiveLine
-                            showGutter
-                            fontSize={18}
-                            showPrintMargin={false}
-                            editorProps={{ $blockScrolling: false }}
-                            setOptions={{
-                                enableBasicAutocompletion: true,
-                                enableLiveAutocompletion: true,
-                                enableSnippets: true,
-                                showLineNumbers: true,
-                                tabSize: 2,
-                            }}
-                        />
-                    </div>
-                );
             }
+            let mode = '';
+            if (language === 'C' || language === 'C++') {
+                mode = 'c_cpp';
+            } else {
+                mode = language;
+            }
+            return (
+                <div
+                    className={isMine ? 'code-box right' : 'code-box'}
+                >
+                    <AceEditor
+                        value={message.message}
+                        mode={mode.toLowerCase()}
+                        theme={theme.toLowerCase()}
+                        name="coding-space-message"
+                        highlightActiveLine
+                        showGutter
+                        fontSize={18}
+                        showPrintMargin={false}
+                        editorProps={{ $blockScrolling: false }}
+                        setOptions={{
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: true,
+                            showLineNumbers: true,
+                            tabSize: 2,
+                        }}
+                    />
+                </div>
+            );
         }
         return null;
     };

@@ -17,7 +17,7 @@ import 'ace-builds/src-noconflict/mode-batchfile';
 import 'ace-builds/src-noconflict/mode-cobol';
 import 'ace-builds/src-noconflict/mode-csharp';
 import 'ace-builds/src-noconflict/mode-css';
-import 'ace-builds/src-noconflict/mode-cobol';
+
 import 'ace-builds/src-noconflict/mode-dart';
 import 'ace-builds/src-noconflict/mode-django';
 import 'ace-builds/src-noconflict/mode-dockerfile';
@@ -35,13 +35,13 @@ import 'ace-builds/src-noconflict/mode-matlab';
 import 'ace-builds/src-noconflict/mode-mysql';
 import 'ace-builds/src-noconflict/mode-pgsql';
 import 'ace-builds/src-noconflict/mode-nginx';
-import 'ace-builds/src-noconflict/mode-perl';
+
 import 'ace-builds/src-noconflict/mode-php';
 import 'ace-builds/src-noconflict/mode-powershell';
 import 'ace-builds/src-noconflict/mode-scala';
 import 'ace-builds/src-noconflict/mode-sass';
 import 'ace-builds/src-noconflict/mode-scss';
-import 'ace-builds/src-noconflict/mode-swift';
+
 import 'ace-builds/src-noconflict/mode-typescript';
 import 'ace-builds/src-noconflict/mode-markdown';
 
@@ -58,7 +58,7 @@ import 'ace-builds/src-noconflict/snippets/batchfile';
 import 'ace-builds/src-noconflict/snippets/cobol';
 import 'ace-builds/src-noconflict/snippets/csharp';
 import 'ace-builds/src-noconflict/snippets/css';
-import 'ace-builds/src-noconflict/snippets/cobol';
+
 import 'ace-builds/src-noconflict/snippets/dart';
 import 'ace-builds/src-noconflict/snippets/django';
 import 'ace-builds/src-noconflict/snippets/dockerfile';
@@ -76,13 +76,13 @@ import 'ace-builds/src-noconflict/snippets/matlab';
 import 'ace-builds/src-noconflict/snippets/mysql';
 import 'ace-builds/src-noconflict/snippets/pgsql';
 import 'ace-builds/src-noconflict/snippets/nginx';
-import 'ace-builds/src-noconflict/snippets/perl';
+
 import 'ace-builds/src-noconflict/snippets/php';
 import 'ace-builds/src-noconflict/snippets/powershell';
 import 'ace-builds/src-noconflict/snippets/scala';
 import 'ace-builds/src-noconflict/snippets/sass';
 import 'ace-builds/src-noconflict/snippets/scss';
-import 'ace-builds/src-noconflict/snippets/swift';
+
 import 'ace-builds/src-noconflict/snippets/typescript';
 import 'ace-builds/src-noconflict/snippets/markdown';
 
@@ -121,7 +121,7 @@ const ChatBottom = ({
     theme,
     setTheme,
     language,
-    setLanguage
+    setLanguage,
 }) => {
     const langList = [
         'Assembly_x86',
@@ -220,9 +220,7 @@ const ChatBottom = ({
                                 {langList.map((lang) => (
                                     <Dropdown.Item
                                         className="dropdown-item"
-                                        onClick={(e) =>
-                                            setLanguage(e.target.text)
-                                        }
+                                        onClick={(e) => setLanguage(e.target.text)}
                                     >
                                         {lang}
                                     </Dropdown.Item>
