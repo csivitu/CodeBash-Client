@@ -24,7 +24,7 @@ const ChatPage = ({name,roomName, roomCode, updateRoomUsers, setRoomData, addMes
     const [errorMessage, setErrorMessage] = useState('');
     const [code, setCode] = useState('');
 
-    const ENDPOINT = 'localhost:5000';
+    const ENDPOINT = 'https://code-bash-backend.herokuapp.com/';
 
     useEffect(() => {
         console.log('I am rerendering');
