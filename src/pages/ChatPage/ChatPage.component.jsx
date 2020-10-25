@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import queryString from 'query-string';
+
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { selectRoomName, selectRoomCode } from '../../redux/room/room.selectors';
+import { updateRoomUsers, addMessage } from '../../redux/roomPersist/roomPersist.actions';
+import { setRoomData } from '../../redux/room/room.actions';
+import { selectUserName } from '../../redux/user/user.selectors';
 
 import MembersSection from '../../components/members-section/members-section.component';
 import ChatSection from '../../components/chat-section/chat-section.component';
 
 import './ChatPage.styles.css';
 
+
 let socket;
 
-const ChatPage = ({ location, history }) => {
-    const [name, setName] = useState('');
-    const [room, setRoom] = useState('');
-    const [messages, setMessages] = useState([]);
+const ChatPage = ({name,roomName, roomCode, updateRoomUsers, setRoomData, addMessage}) => {
     const [input, setInput] = useState('');
-    const [latestMsg, setLatestMsg] = useState({});
-    const [roomUsers, setRoomUsers] = useState([]);
+    // const [latestMsg, setLatestMsg] = useState({});
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [emojiPopup, setEmojiPopup] = useState(0);
-    const [cePopup, setCePopup] = useState(0);
     const [code, setCode] = useState('');
-    const [theme, setTheme] = useState('Monokai');
-    const [language, setLanguage] = useState('Javascript');
 
     const ENDPOINT = 'localhost:5000';
 
@@ -35,13 +35,10 @@ const ChatPage = ({ location, history }) => {
     }, []);
 
     useEffect(() => {
-        const { name, room } = queryString.parse(location.search);
-        setName(name);
-        setRoom(room);
 
         socket = io(ENDPOINT);
 
-        socket.emit('joinRoom', { username: name, room }, (error) => {
+        socket.emit('joinRoom', { username: name, roomCode, roomName }, (error) => {
             if (error) {
                 setShouldRedirect(true);
                 setErrorMessage(error);
@@ -52,27 +49,33 @@ const ChatPage = ({ location, history }) => {
             socket.emit('disconnect');
             socket.off();
         };
-    }, [ENDPOINT, location.search]);
+    }, [ENDPOINT, name, roomCode]);
 
     useEffect(() => {
         socket.on('message', (message) => {
-            console.log(message);
-            setLatestMsg(message);
+            // console.log(message);
+            // setLatestMsg(message);
+            addMessage(message);
             setInput('');
+        });
+
+        socket.on('roomData', ({ roomUsers, roomName }) => {
+            updateRoomUsers(roomUsers);
+            setRoomData(roomName, roomCode);
         });
         // eslint-disable-next-line
     }, []);
 
-    useEffect(() => {
-        socket.on('roomData', ({ roomUsers }) => {
-            setRoomUsers(roomUsers);
-        });
-    }, [roomUsers]);
+    // useEffect(() => {
+    //     socket.on('roomData', ({ roomUsers }) => {
+    //         updateRoomUsers(roomUsers);
+    //     });
+    // }, [roomUsers]);
 
-    useEffect(() => {
-        setMessages((messages) => [...messages, latestMsg]);
-        console.log(messages);
-    }, [latestMsg]);
+    // useEffect(() => {
+    //     setMessages((messages) => [...messages, latestMsg]);
+    //     console.log(messages);
+    // }, [latestMsg]);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -81,6 +84,7 @@ const ChatPage = ({ location, history }) => {
             message: input,
             user: name,
             type: 'message',
+            roomCode
         });
     };
 
@@ -91,27 +95,12 @@ const ChatPage = ({ location, history }) => {
             message: code,
             user: name,
             type: 'code',
+            roomCode
         });
     };
 
     const changeInput = (e) => setInput(e.target.value);
     const addEmojiToText = (emoji) => setInput(input + emoji);
-    const toggleEmojiPopup = () => {
-        if (emojiPopup === 0) {
-            setEmojiPopup(1);
-            setCePopup(0);
-        } else {
-            setEmojiPopup(0);
-        }
-    };
-    const toggleCePopup = () => {
-        if (cePopup === 0) {
-            setCePopup(1);
-            setEmojiPopup(0);
-        } else {
-            setCePopup(0);
-        }
-    };
     const onChangeCode = (codeValue) => {
         setCode(codeValue);
     };
@@ -182,29 +171,30 @@ const ChatPage = ({ location, history }) => {
 
     return (
         <div className="chat-page">
-            <MembersSection members={roomUsers} />
+            <MembersSection />
             <ChatSection
-                room={room}
-                messages={messages}
-                name={name}
                 onInputChange={changeInput}
                 sendMessage={sendMessage}
                 sendCode={sendCode}
                 input={input}
                 addEmojiToText={addEmojiToText}
-                toggleEmojiPopup={toggleEmojiPopup}
-                emojiPopup={emojiPopup}
-                toggleCePopup={toggleCePopup}
-                cePopup={cePopup}
                 code={code}
                 onChangeCode={onChangeCode}
-                theme={theme}
-                setTheme={setTheme}
-                language={language}
-                setLanguage={setLanguage}
             />
         </div>
     );
 };
 
-export default ChatPage;
+const mapStateToProps = createStructuredSelector({
+    roomName: selectRoomName,
+    roomCode: selectRoomCode,
+    name: selectUserName,
+})
+
+const mapDispatchToProps = dispatch => ({
+    addMessage: (message) => (dispatch(addMessage(message))),
+    updateRoomUsers: (users) => (dispatch(updateRoomUsers(users))),
+    setRoomData: (roomName, roomCode) => (dispatch(setRoomData(roomName, roomCode)))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(ChatPage);

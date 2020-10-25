@@ -3,6 +3,15 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { Dropdown } from 'react-bootstrap';
 import AceEditor from 'react-ace';
+import { IconContext } from 'react-icons';
+import { MdSend } from 'react-icons/md';
+import { HiEmojiHappy } from 'react-icons/hi';
+import { BiCodeAlt } from 'react-icons/bi';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { selectCePopup, selectEmojiPopup, selectLanguage, selectTheme } from '../../redux/room/room.selectors';
+import { toggleCodePopup,toggleEmojiPopup,setTheme,setLanguage } from '../../redux/room/room.actions';
 
 import 'ace-builds/src-noconflict/mode-java';
 import 'ace-builds/src-noconflict/mode-javascript';
@@ -99,10 +108,6 @@ import 'ace-builds/src-noconflict/theme-textmate';
 import 'ace-builds/src-noconflict/theme-solarized_dark';
 import 'ace-builds/src-noconflict/theme-solarized_light';
 import 'ace-builds/src-noconflict/theme-terminal';
-
-import { ReactComponent as CodeIcon } from '../../assets/code.svg';
-import { ReactComponent as EmojiIcon } from '../../assets/emoji.svg';
-import { ReactComponent as SendIcon } from '../../assets/send.svg';
 
 import './chat-bottom.styles.css';
 
@@ -286,12 +291,21 @@ const ChatBottom = ({
         <div className="chat-bottom">
             <div className="icon-left">
                 {renderCePopup()}
-                <CodeIcon className="icon code-icon" onClick={toggleCePopup} />
+                <button type="button" className="icon emoji-icon" onClick={toggleCePopup}>
+                    <IconContext.Provider value={{ color: 'darkblue', className: 'icon send-icon', size: 40 }}>
+                        <div>
+                            <BiCodeAlt />
+                        </div>
+                    </IconContext.Provider>
+                </button>
                 {renderEmojiPopup()}
-                <EmojiIcon
-                    className="icon emoji-icon"
-                    onClick={toggleEmojiPopup}
-                />
+                <button type="button" className="icon emoji-icon" onClick={toggleEmojiPopup}>
+                    <IconContext.Provider value={{ color: 'darkblue', className: 'icon send-icon', size: 40 }}>
+                        <div>
+                            <HiEmojiHappy />
+                        </div>
+                    </IconContext.Provider>
+                </button>
             </div>
             <textarea
                 className="chat-message-input-box"
@@ -299,10 +313,28 @@ const ChatBottom = ({
                 onChange={onInputChange}
             />
             <button type="button" className="icon-right" onClick={sendMessage}>
-                <SendIcon className="icon send-icon" />
+                <IconContext.Provider value={{ color: 'darkblue', className: 'icon send-icon', size: 40 }}>
+                    <div>
+                        <MdSend />
+                    </div>
+                </IconContext.Provider>
             </button>
         </div>
     );
 };
 
-export default ChatBottom;
+const mapStateToProps = createStructuredSelector({
+    cePopup: selectCePopup,
+    emojiPopup: selectEmojiPopup,
+    theme: selectTheme,
+    language: selectLanguage
+});
+
+const mapDispatchToProps = dispatch => ({
+    toggleCePopup: () => dispatch(toggleCodePopup()),
+    toggleEmojiPopup: () => dispatch(toggleEmojiPopup()),
+    setTheme: () => dispatch(setTheme()),
+    setLanguage: () => dispatch(setLanguage()),
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(ChatBottom);

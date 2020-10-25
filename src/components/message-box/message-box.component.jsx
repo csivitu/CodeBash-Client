@@ -31,9 +31,22 @@ const MessageBox = ({
             if (message.type === 'message') {
                 return (
                     <div
-                        className={isMine ? 'message-box right' : 'message-box'}
+                        className={isMine ? 'message-box right-message' : 'message-box'}
                     >
-                        {`${message.user}- ${message.message}`}
+                        {message.user === 'Admin'
+                            ? (
+                                <div className="name-admin">
+                                    {message.user}
+                                </div>
+                            )
+                            : (
+                                <div className="name">
+                                    {message.user}
+                                </div>
+                            )}
+                        <div className="message-value">
+                            {message.message.replace('\r\n', '<br />\r\n')}
+                        </div>
                     </div>
                 );
             }
@@ -45,8 +58,11 @@ const MessageBox = ({
             }
             return (
                 <div
-                    className={isMine ? 'code-box right' : 'code-box'}
+                    className={isMine ? 'message-box code-box right-message' : 'message-box code-box'}
                 >
+                    <div className="name">
+                        {message.user}
+                    </div>
                     <AceEditor
                         value={message.message}
                         mode={mode.toLowerCase()}

@@ -1,11 +1,25 @@
 .chat-bottom {
 	width: 100%;
-	min-height: 55px;
-	background-color: royalblue;
-	border: 2px solid black;
+	min-height: 80px;
+	background-color: #03a9f4;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+
+.icon-right {
+	flex: 1
+}
+
+.icon-left {
+	flex: 2;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.chat-bottom > textarea {
+	flex: 15;
+	border-radius: 10px;
 }
 
 .chat-message-input-box {
@@ -20,6 +34,12 @@
 	color: white;
 	height: 35px;
 	cursor: pointer;
+}
+
+.icon, .icon-right{
+	background-color: transparent;
+	padding: 0;
+	border: none;
 }
 
 .emoji-picker {
@@ -41,7 +61,7 @@
     position: relative;
     display: inline-block;
     font-size: 20px;
-	z-index: 100;
+	/* z-index: 100; */
 }
 
 .dropbtn {
@@ -52,11 +72,11 @@
 }
 
 .dropdown-content {
-	display: none;
+	/* display: none; */
 	background-color: black;
     position: absolute;
     min-width: 10rem;
-	z-index: 100;
+	z-index: 100 !important;
 	font-size: 20px;
 	height: 200px;
 	overflow-y: scroll;

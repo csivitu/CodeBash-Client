@@ -81,7 +81,7 @@
 	letter-spacing: 4px;
 	text-transform: uppercase;
 	color: white;
-	cursor: pointer;
+	/* cursor: pointer; */
 	animation: card 40s linear infinite;
 
 
@@ -104,7 +104,7 @@
 
 	background: linear-gradient(90deg, #03a9f4,#bdb300,#0f9677,#03a9f4);
 	background-size: 800%;	
-	cursor: pointer;
+	/* cursor: pointer; */
 	-webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 	animation: Text 40s linear infinite;
