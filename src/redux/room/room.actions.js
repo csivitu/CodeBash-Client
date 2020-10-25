@@ -13,10 +13,13 @@ export const toggleCodePopup = () => ({
 	type: RoomActionTypes.TOGGLE_CODE_POPUP,
 })
 
-export const setTheme = (theme) => ({
-	type: RoomActionTypes.SET_THEME,
-	payload: theme
-})
+export const setTheme = (theme) => {
+	console.log('INSIDE ROOM ACTION:::', theme);
+	return {
+		type: RoomActionTypes.SET_THEME,
+		payload: theme
+	}
+}
 
 export const setLanguage = (language) => ({
 	type: RoomActionTypes.SET_LANGUAGE,

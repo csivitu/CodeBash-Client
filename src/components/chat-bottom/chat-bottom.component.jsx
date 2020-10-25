@@ -182,12 +182,12 @@ const ChatBottom = ({
         'Terminal',
     ];
 
-    let mode = '';
-    if (language === 'C' || language === 'C++') {
-        mode = 'c_cpp';
-    } else {
-        mode = language;
-    }
+    // let mode = '';
+    // if (language === 'C' || language === 'C++') {
+    //     mode = 'c_cpp';
+    // } else {
+    //     mode = language;
+    // }
 
     const addEmoji = (e) => {
         const emoji = e.native;
@@ -258,7 +258,7 @@ const ChatBottom = ({
                 <AceEditor
                     value={code}
                     onChange={onChangeCode}
-                    mode={mode.toLowerCase()}
+                    mode={language === 'C' || language === 'C++' ? 'c_cpp' : language.toLowerCase()}
                     theme={theme.toLowerCase()}
                     name="coding-space"
                     highlightActiveLine
@@ -333,8 +333,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
     toggleCePopup: () => dispatch(toggleCodePopup()),
     toggleEmojiPopup: () => dispatch(toggleEmojiPopup()),
-    setTheme: () => dispatch(setTheme()),
-    setLanguage: () => dispatch(setLanguage()),
+    setTheme: (theme) => dispatch(setTheme(theme)),
+    setLanguage: (language) => dispatch(setLanguage(language)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ChatBottom);
