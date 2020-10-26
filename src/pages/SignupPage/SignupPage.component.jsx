@@ -18,18 +18,21 @@ const SignupPage = ({setCurrentUser}) => {
     const [userName, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [buttonText, setButtonText] = useState('Sign Up');
 
     const history = useHistory();
 
     const signup = async (event) => {
         event.preventDefault();
+        setButtonText('Signing Up...');
         const res = await api.post('/signup', { fullName, userName, email, password });
         if (res.data.status === 'success') {
             setCurrentUser(res.data.user._doc);
+            setButtonText('Sign Up');
             history.push('/join');
         } else {
-            console.log('RESSS IS::', res);
             swal('Error Signing Up');
+            setButtonText('Sign Up');
         }
     }
 
@@ -99,7 +102,7 @@ const SignupPage = ({setCurrentUser}) => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button type="submit" id="SignIn" className="GradientButton" > Sign Up </button>
+                        <button type="submit" id="SignIn" className="GradientButton" disabled={buttonText === 'Signing Up...' ? true : false} > {buttonText} </button>
                         <br />
                     </form>
                     <Link to="/login">Already have an account? Log In</Link>

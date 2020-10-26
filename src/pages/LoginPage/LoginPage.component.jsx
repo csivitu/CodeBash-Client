@@ -14,18 +14,22 @@ import bg from '../../assets/bg/bg.png';
 const LoginPage = ({setCurrentUser}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [buttonText, setButtonText] = useState('Log In');
 
     const history = useHistory();
 
     const login = async (event) => {
         event.preventDefault();
         console.log('hello');
+        setButtonText('Logging In...');
         const res = await api.post('/login', { email, password });
         if (res.data.status === 'success') {
             setCurrentUser(res.data.user._doc);
+            setButtonText('Log In');
             history.push('/join');
         } else {
             swal('Error Logging In');
+            setButtonText('Log In');
         }
     }
 
@@ -75,7 +79,7 @@ const LoginPage = ({setCurrentUser}) => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button type="submit" id="SignIn" className="GradientButton" > Log In </button>
+                        <button type="submit" id="SignIn" className="GradientButton" disabled={buttonText==='Logging In...' ? true : false} > {buttonText} </button>
                         <br />
                         <Link to="/signup" style={{zIndex: 10}}>No account yet? Sign Up</Link>
                         <br />
