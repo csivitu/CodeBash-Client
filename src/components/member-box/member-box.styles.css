@@ -1,0 +1,17 @@
+.member-box {
+	height: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.icon-div {
+	margin-right: 10px;
+}
+
+.name {
+	color: white;
+}
+
+.name-admin {
+	color: black;
+}
