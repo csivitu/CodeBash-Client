@@ -1,0 +1,61 @@
+.message-box {
+	text-align: left;
+	background-color: #4f93d6;
+	font-size: 14px;
+	width: 45%;
+	min-height: 50px;
+	padding: 10px;
+	margin-bottom: 10px;
+	clip-path: polygon(0 0,100% 0,100% 100%, 10px 100%, 10px 15px);
+	border-radius: 5px;
+}
+
+.message-box > * {
+	margin-left: 10px;
+	word-break: break-all;
+ 	white-space: pre-wrap
+}
+
+.name {
+	font-weight: bolder;
+	font-size: 16px;
+	padding-bottom: 5px;
+}
+
+.name-admin {
+	font-weight: bolder;
+	padding-bottom: 5px;
+}
+
+.message-value {
+	font-size: 14px;
+	min-height: 40px;
+}
+
+.code-box {
+	margin-bottom: 10px;
+	height: fit-content;
+	width: max-content;
+}
+
+.right-message {
+	margin-left: auto;
+	padding-right: 10px;
+	clip-path: polygon(0 0,100% 0,98% 15px,98% 100%, 0 100%);
+	background-color: #1a82eb;
+}
+
+.right-message > * {
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+#coding-space-message {
+	border-radius: 10px;
+	border: 5px solid #4f93d6;
+	height: 300px;
+}
+
+#coding-space-message > .ace_scroller {
+	pointer-events: none;
+}

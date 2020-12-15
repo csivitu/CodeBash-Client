@@ -1,0 +1,166 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	/* z-index: 10; */
+}
+
+html, body { 
+	 height: 100vh;
+	 width: 100vw;
+	 overflow-y: hidden;
+	 overflow-x: hidden;
+	 font-family: 'Montserrat', sans-serif;
+	 background-color: #101010;
+	 display: flex;
+	 justify-content: space-between;
+}
+
+.hash-icon {
+	width: calc(300px + 10vw);
+}
+
+.semicolon-icon {
+	width: calc(70px + 2vw);
+	margin-left: 50px;
+}
+
+.right, #card {
+	height: 100%;
+	width: 500px;
+}
+
+#card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-card {
+	height: 300px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-card > * {
+	display: block;
+}
+
+.inner-card > a {
+	z-index: 10;
+}
+
+.form {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+#SignIn {
+	color: black;
+	z-index: 10;
+	margin-top: 20px;
+}
+
+.textbox{
+	background-color: #fff;
+	border: none;
+	height: 60px;
+	width: 95%;
+	padding: 10px;
+	padding-left: 20px;
+	border-radius: 25px;
+	z-index: 2;
+}
+
+::-webkit-input-placeholder {
+	font-size: 1rem;
+   font-style: italic;
+   color: rgba(170,170,170,0.8);
+}
+:-moz-placeholder {
+	font-size: 1rem;
+   font-style: italic;  
+   color: rgba(170,170,170,0.8);
+}
+::-moz-placeholder {
+	font-size: 1rem;
+   font-style: italic; 
+   color: rgba(170,170,170,0.8);
+}
+:-ms-input-placeholder {  
+	font-size: 1rem;
+   font-style: italic; 
+   color: rgba(170,170,170,0.8);
+}
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+a{
+	color: white;
+	font-size: 0.8rem;
+}
+
+.left {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+}
+
+
+.heading-text > h1  {
+	font-size: 6rem;
+	font-weight: bold;
+}
+
+.heading-text {
+	margin-left: 10px;
+}
+
+.GradientAnimationText {
+	font-style: italic;
+}
+
+.icons {
+	display: flex;
+}
+
+.bg {
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.05;
+}
+
+.redirect-link {
+	font-size: 1rem;
+}
+
+@media only screen and (max-width: 1200px) {
+	.heading-text > h1  {
+		font-size: 4rem;
+		font-weight: bold;
+	}
+
+	.hash-icon {
+		width: calc(250px + 10vw);
+	}
+	
+	.semicolon-icon {
+		width: calc(50px + 2vw);
+		margin-left: 50px;
+	}
+}

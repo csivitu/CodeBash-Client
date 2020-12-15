@@ -1,0 +1,21 @@
+.chat-header {
+	width: 100%;
+	min-height: 75px;
+	background-color: #03a9f4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.room-name {
+	font-size: 30px;
+	font-weight: bolder;
+}
+
+.room-code {
+	position: absolute;
+	right: 10px;
+	bottom: 2px;
+
+}

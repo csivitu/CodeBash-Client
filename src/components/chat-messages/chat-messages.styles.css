@@ -1,0 +1,11 @@
+.chat-messages {
+	background-color: #3f3a3a;
+	padding: 20px;
+	min-width: 200px;
+	flex: 1 1 auto;
+	overflow-y: hidden;
+}
+
+.chat-messages > button {
+	background-color: blue;
+}
